@@ -1,11 +1,15 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 import CustomNavbar from '../components/CustomNavbar'
 
 const Detalle = () => {
   return (
     <>
-    <CustomNavbar></CustomNavbar>
-    Detalle</>
+      <CustomNavbar/>
+      <Container fluid className="mt-5 pt-4">
+        Detalle
+      </Container>
+    </>
   )
 }
 
