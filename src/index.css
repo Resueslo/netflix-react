@@ -4,3 +4,12 @@ body {
   color: #ffffff !important;
   margin: 0;
 }
+
+.container-general {
+  margin-top: 58px;
+  padding: 0 !important;
+}
+
+.banner {
+  opacity: .8;
+}

@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <CustomNavbar/>
-      <Container fluid className="mt-5 pt-4">
+      <Container fluid className="container-general">
         Home
         <Carousel></Carousel>
       </Container>
