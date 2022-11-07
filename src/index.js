@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //VISTAS
 import App from './App';
 import Error from './views/Error';
-import Detalle from './views/Detalle';
+import Detalle from './views/Detalle/Detalle';
 import Home from './views/Home.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
