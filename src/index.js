@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //VISTAS
-import App from './App';
+
 import Error from './views/Error';
 import Detalle from './views/Detalle/Detalle';
 
@@ -19,7 +19,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/home" element={<Home />}/>
-        <Route path="/detalle/:id" component={Detalle} element={<Detalle />}/>
+        <Route path="/detalle/:id/:type" component={Detalle} element={<Detalle />}/>
         <Route path="*" element={<Error />}/>
       </Routes>
     </BrowserRouter>

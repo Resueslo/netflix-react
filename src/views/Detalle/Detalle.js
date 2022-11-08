@@ -19,7 +19,8 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 const Detalle = () => {
   //PARAMETROS
   const location = useParams();
-  const URL_IMAGE = "https://image.tmdb.org/t/p/original"
+  console.log(location);
+  const URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
   const [detalle, setDetalle] = useState([]);
   const [generos, setGeneros] = useState("");
@@ -65,7 +66,7 @@ const Detalle = () => {
   const obtenerCertificacion = async id => {
     await obtenerFechasYCertificacion(id)
       .then((fechas) => {
-        let fecha = fechas.data.results.find(fecha => fecha.iso_3166_1 == "MX" || fecha.iso_3166_1 == "US");
+        let fecha = fechas.data.results.find(fecha => fecha.iso_3166_1 === "MX" || fecha.iso_3166_1 === "US");
 
         if (fecha) {
           setCertificacion(fecha.release_dates[0].certification)
@@ -101,7 +102,7 @@ const Detalle = () => {
             <Image fluid className='poster' src={`${URL_IMAGE}${detalle.poster_path}`}></Image>
           </Col>
           <Col xs md="6">
-            <h3 className='mt-5'>{detalle.title}</h3>
+            <h3 className='mt-5'>{detalle?.title || detalle?.name}</h3>
             <div className="mt-4 mb-4">
               <span id="fecha">{moment(detalle.release_date).format("YYYY")}</span>
               <span id="certificacion" className="ms-3">{certificacion}</span>
