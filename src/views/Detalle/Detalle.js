@@ -17,6 +17,8 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 
 
 const Detalle = () => {
+  //PARAMETROS
+  const location = useParams();
   const URL_IMAGE = "https://image.tmdb.org/t/p/original"
 
   const [detalle, setDetalle] = useState([]);
@@ -27,10 +29,10 @@ const Detalle = () => {
   const [recomendaciones, setRecomendaciones] = useState([]);
 
   useEffect(() => {
-    obtenerDetalle(829280)
-    obtenerCreditos(829280)
-    obtenerCertificacion(829280)
-    obtnerRecomendaciones(829280)
+    obtenerDetalle(location.id)
+    obtenerCreditos(location.id)
+    obtenerCertificacion(location.id)
+    obtnerRecomendaciones(location.id)
   }, []);
 
   const obtenerDetalle = async id => {
