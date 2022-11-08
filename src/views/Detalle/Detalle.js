@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './detalle.css'
 import { getDataMovie } from "../../services/services";
-
+import { useParams} from 'react-router-dom';
 import moment from  'moment';
 
 
@@ -15,18 +15,16 @@ import CustomNavbar from '../../components/CustomNavbar'
 
 const Detalle = () => {
   const URL_IMAGE = "https://image.tmdb.org/t/p/original"
-
   const [detalle, setDetalle] = useState([]);
-
+  const location = useParams();
   useEffect(() => {
-    obtenerDetalle(634649)
+    obtenerDetalle(location.id)
   }, []);
 
   const obtenerDetalle = async id => {
     await getDataMovie(id)
     .then((movie) => {
-      if(movie.data) {
-        console.log("detalle", movie.data)
+      if(movie.data) {  
         setDetalle(movie.data)
       } 
     }).catch(() => {
