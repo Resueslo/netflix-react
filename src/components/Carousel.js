@@ -1,25 +1,47 @@
-import React ,{ useState , useEffect } from 'react'
-import {getLastMovies } from '../services/services';
+import React, { useState, useEffect } from 'react'
+import {imageUrl } from '../services/services';
+import "./carousel.css"
+import clientAxios from '../config/clientAxios';
+import { Row,Image } from 'react-bootstrap';
 
-
-export const Carousel = () => {
+function Carousel  ({name,url})  {
     const [movies, setMovies] = useState([]);
-    const [error, setError] = useState(null);
 
-    const getMovies = async () => {
-            
-            setMovies(await getLastMovies().then(response => {
-                console.log(response.data);
-                setMovies(response.data);
-            }).catch(error =>{setError(error)})); 
-    }
-
+    
     useEffect(() => {
-         getMovies();
-        console.log(movies);
-    }, []);
+        async function getData(){
+            const request = await clientAxios.get(url);
+            setMovies(request.data.results);
+            return request;
+        }
+        getData();
+    }, [url]);
+
+
+
+
 
     return (
-        <div>Carousel</div>
+        <Row>
+            <h2>{name}</h2>
+            <div  className='row__posters'>
+                { movies.map(movie => {
+                        const url= imageUrl+movie.poster_path;
+                        return <Image key={movie.id} src={url} className="row__poster" alt={movie.name}></Image>
+                    
+                    })
+                }
+            </div>
+        </Row>
+
+
+
     )
 }
+
+export default Carousel;
+
+    
+    
+
+
