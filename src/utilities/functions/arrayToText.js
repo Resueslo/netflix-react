@@ -3,7 +3,7 @@ export const generarString = array => {
 
     if(array.length) {
         array.forEach((element, index) => {
-            cadena += `${element.name}${index == array.length-1 ? '' : ', '}`;
+            cadena += `${element.name}${index === array.length-1 ? '' : ', '}`;
         });
     }
     return cadena;

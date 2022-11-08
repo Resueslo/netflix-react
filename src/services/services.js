@@ -7,7 +7,7 @@ export const videoUrl="https://www.youtube.com/watch?v="
 export const detailUrl= "/detalle.html?id=";
 
 export const getLastMovies = `/movie/now_playing?api_key=${API_KEY}&language=es-MX&page=1`;
-export const  getGenreMovies = clientAxios.get(`/genre/movie/list?api_key=${API_KEY}&language=es-MX`);
+export const  getGenreMovies = `/genre/movie/list?api_key=${API_KEY}&language=es-MX`;
 export const getTvShows = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es-MX`;
 
 
