@@ -18,7 +18,7 @@ export const  obtenerCreditosPelicula =  (id_movie) => {
 }
 
 export const  obtenerRecomendacionesPeliculas = (id_movie) => {
-    return   clientAxios.get(`/movie/${id_movie}/recommendations?api_key=${API_KEY}&language=en-US`);
+    return   clientAxios.get(`/movie/${id_movie}/recommendations?api_key=${API_KEY}&language=es-MX`);
 }
 
 export const  obtenerFechasYCertificacion =  (id_movie) => {
