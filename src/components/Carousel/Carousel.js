@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import {imageUrl } from '../../services/services';
 import "./carousel.css"
 import clientAxios from '../../config/clientAxios';
-import { Row,Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function Carousel  ({name,url})  {
+function Carousel  ({name,url,type})  {
     const [movies, setMovies] = useState([]);
 
     
@@ -24,8 +24,9 @@ function Carousel  ({name,url})  {
             <div  className='row__posters'>
                 { movies.map(movie => {
                         const url= imageUrl+movie.poster_path;
+                        
                         return(
-                        <Link  key={movie.id} to={{ pathname:`/detalle/${movie.id}`, state: { id: movie.id}} }><Image key={movie.id} src={url} className="row__poster" alt={movie.name}></Image></Link>
+                        <Link  key={movie.id} to={{ pathname:`/detalle/${movie.id}/${type}`, state: { id: movie.id , type: type}} }><Image key={movie.id} src={url} className="row__poster" alt={movie.name}></Image></Link>
                         )
                     })
                 }
