@@ -1,11 +1,26 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { BsSearch, BsFillBellFill } from "react-icons/bs";
+import CustomModal from './CustomModal';
 
-const CustomNavbar = () => {
+const CustomNavbar = () => {  
+  const [showModal, setShowModal] = useState([]);
+
+  function handleShowModal() {
+    console.log("entro");
+    setShowModal(true);
+  }
+
+  function handleCloseModal() {
+    console.log("entro");
+    setShowModal(false);
+  }
+
+
+
   return (
     <>
       <Navbar bg="dark" variant="dark" fixed="top">
@@ -30,7 +45,7 @@ const CustomNavbar = () => {
 
           <Nav>
             <NavLink className="nav-link">
-              <BsSearch></BsSearch>
+              <BsSearch onClick={() => handleShowModal()}></BsSearch>
             </NavLink>
             <NavLink className="nav-link">
               <BsFillBellFill></BsFillBellFill>
@@ -38,6 +53,8 @@ const CustomNavbar = () => {
           </Nav>
         </Container>
       </Navbar>
+
+      <CustomModal show={showModal} fullscreen={true} closeModal={handleCloseModal}></CustomModal>
     </>
   )
 }

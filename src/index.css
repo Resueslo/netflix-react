@@ -17,3 +17,17 @@ body {
 .text-gray {
   color: #ffffff8c;
 }
+
+/* BUSQUEDA */
+.modal-busqueda .modal-content {
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.modal-busqueda .modal-header {
+  border: none;
+}
+
+.modal-busqueda .btn-close {
+  background-color: #ffffff;
+}
