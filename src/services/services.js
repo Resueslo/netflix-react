@@ -9,7 +9,7 @@ export const getLastMovies =  () =>{
  
 
 export const getDataMovie = (id_movie) => {
-    return   clientAxios.get(`/movie/${id_movie}?api_key=${API_KEY}&language=en-US`);
+    return   clientAxios.get(`/movie/${id_movie}?api_key=${API_KEY}&language=es-MX`);
 
 }
 
