@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import {imageUrl } from '../services/services';
+import {imageUrl } from '../../services/services';
 import "./carousel.css"
-import clientAxios from '../config/clientAxios';
+import clientAxios from '../../config/clientAxios';
 import { Row,Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 

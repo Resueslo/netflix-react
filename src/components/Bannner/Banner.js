@@ -36,9 +36,9 @@ function Banner({ url }) {
         >
             <div className='banner__contents'>
                 <h1 className="banner__title">{movie?.title || movie?.name || movie?.original_name}</h1>
-                <div className="banner_buttons">
-                    <div className="banner_button">Play</div>
-                    <div className="banner_button">My List</div>
+                <div className="banner__buttons">
+                    <div className="banner__button">Play</div>
+                    <div className="banner__button">My List</div>
                 </div>
 
                 <h1 className='banner__description'>

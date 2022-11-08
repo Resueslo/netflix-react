@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import CustomNavbar from '../components/CustomNavbar'
-import  Carousel  from '../components/Carousel'
+import  Carousel  from '../components/Carousel/Carousel'
 import {getLastMovies,getTrending, getTvShows} from '../services/services.js'
 import  Banner  from '../components/Bannner/Banner'
 const Home = () => {
