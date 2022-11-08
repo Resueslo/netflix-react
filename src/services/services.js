@@ -1,15 +1,19 @@
+
 import clientAxios from "../config/clientAxios";
 
 const API_KEY = "9eb4e5199ac559b2a5a63d0b43ea5c76";
+export const imageUrl="https://image.tmdb.org/t/p/w220_and_h330_face";
+export const videoUrl="https://www.youtube.com/watch?v="
+export const detailUrl= "/detalle.html?id=";
+
+export const getLastMovies = `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
+export const  getGenreMovies = clientAxios.get(`/genre/movie/list?api_key=${API_KEY}&language=en-US`);
+export const getTvShows = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US`;
 
 
-export const getLastMovies =  () =>{
-    return   clientAxios.get(`/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
-}
- 
 
 export const getDataMovie = (id_movie) => {
-    return   clientAxios.get(`/movie/${id_movie}?api_key=${API_KEY}&language=en-US`);
+    return   clientAxios.get(`/movie/${id_movie}?api_key=${API_KEY}&language=es-MX`);
 
 }
 
@@ -30,17 +34,16 @@ export const  obtenerBusquedasPalabras =  (busqueda, texto)=> {
 }
 
 
-export const  getGenreMovies =   () => {
-    return  clientAxios.get(`/genre/movie/list?api_key=${API_KEY}&language=en-US`);
 
-}
+
+
 export const  getDetailTV =  (id)=> {
     return  clientAxios.get(`/tv/${id}?api_key=${API_KEY}&language=en-US`);
 
 }
 
 export const  getTrending =  (option) =>{
-    return  clientAxios.get(`/trending/${option}/day?api_key=${API_KEY}&language=en-US`);
+    return   `/trending/${option}/day?api_key=${API_KEY}&language=en-US`;
 
 }
 
