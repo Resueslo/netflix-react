@@ -4,25 +4,32 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { BsSearch, BsFillBellFill } from "react-icons/bs";
+import CustomModal from './CustomModal';
 import "./Navbar/Navbar.css"
 import clientAxios
- from '../config/clientAxios';
+  from '../config/clientAxios';
 
-function CustomNavbar  ({url})  {
-
-  const [genres,setGenres] = useState([]);
+function CustomNavbar({ url }) {
+  const [showModal, setShowModal] = useState(false);
+  const [genres, setGenres] = useState([]);
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
-  
-    useEffect(() => {
-      async function getData(){
-          const request = await clientAxios.get(url);
-          setGenres(request.data.genres); 
-      }
-      getData();
+
+  useEffect(() => {
+    async function getData() {
+      const request = await clientAxios.get(url);
+      setGenres(request.data.genres);
+    }
+    getData();
   }, [url]);
 
+  function handleShowModal() {
+    setShowModal(true);
+  }
 
+  function handleCloseModal() {
+    setShowModal(false);
+  }
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -61,19 +68,19 @@ function CustomNavbar  ({url})  {
             <NavLink className="nav-link" to="/home">Inicio</NavLink>
             <NavLink className="nav-link">Series</NavLink>
             <NavLink className="nav-link">Generos
-             
-              { genres.map(genre => {
-                        console.log(genre.name)
-                        })
-                        }
-                        
-              </NavLink>
+
+              {genres.map(genre => {
+                console.log(genre.name)
+              })
+              }
+
+            </NavLink>
             <NavLink className="nav-link">Novedades populares</NavLink>
           </Nav>
 
           <Nav>
             <NavLink className="nav-link">
-              <BsSearch></BsSearch>
+              <BsSearch onClick={() => handleShowModal()}></BsSearch>
             </NavLink>
             <NavLink className="nav-link">
               <BsFillBellFill></BsFillBellFill>
@@ -81,6 +88,8 @@ function CustomNavbar  ({url})  {
           </Nav>
         </Container>
       </Navbar>
+
+      <CustomModal show={showModal} fullscreen={true} closeModal={handleCloseModal}></CustomModal>
     </>
   )
 }
