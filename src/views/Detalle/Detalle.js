@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import './detalle.css'
-import { getDataMovie } from "../../services/services";
-import { useParams} from 'react-router-dom';
-import moment from  'moment';
+import { getDataMovie, obtenerCreditosPelicula, obtenerFechasYCertificacion, obtenerRecomendacionesPeliculas } from "../../services/services";
+import { generarString } from '../../utilities/functions/arrayToText'
+
+import moment from 'moment';
 
 
 import { Container } from 'react-bootstrap'
@@ -11,26 +13,83 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import CustomNavbar from '../../components/CustomNavbar'
+import CustomCard from '../../components/CustomCard/CustomCard';
 
 
 const Detalle = () => {
-  const URL_IMAGE = "https://image.tmdb.org/t/p/original"
-  const [detalle, setDetalle] = useState([]);
+  //PARAMETROS
   const location = useParams();
+  const URL_IMAGE = "https://image.tmdb.org/t/p/original"
+
+  const [detalle, setDetalle] = useState([]);
+  const [generos, setGeneros] = useState("");
+  const [produccion, setProduccion] = useState("");
+  const [creditos, setCreditos] = useState("");
+  const [certificacion, setCertificacion] = useState("");
+  const [recomendaciones, setRecomendaciones] = useState([]);
+
   useEffect(() => {
     obtenerDetalle(location.id)
+    obtenerCreditos(location.id)
+    obtenerCertificacion(location.id)
+    obtnerRecomendaciones(location.id)
   }, []);
 
   const obtenerDetalle = async id => {
     await getDataMovie(id)
-    .then((movie) => {
-      if(movie.data) {  
-        setDetalle(movie.data)
-      } 
-    }).catch(() => {
-      console.log("Ocurrio un error, intente de nuevo más tarde.")
-    });
+      .then((movie) => {
+        if (movie.data) {
+          setDetalle(movie.data)
 
+          setGeneros(generarString(movie.data.genres))
+          setProduccion(generarString(movie.data.production_companies))
+        }
+      }).catch(() => {
+        console.log("Ocurrio un error, intente de nuevo más tarde.")
+      });
+
+  }
+
+  const obtenerCreditos = async id => {
+    await obtenerCreditosPelicula(id)
+      .then((creditos) => {
+        if (creditos.data) {
+          setCreditos(generarString(creditos.data.cast))
+        }
+      }).catch(() => {
+        console.log("Ocurrio un error, intente de nuevo más tarde.")
+      });
+
+  }
+
+  const obtenerCertificacion = async id => {
+    await obtenerFechasYCertificacion(id)
+      .then((fechas) => {
+        let fecha = fechas.data.results.find(fecha => fecha.iso_3166_1 == "MX" || fecha.iso_3166_1 == "US");
+
+        if (fecha) {
+          setCertificacion(fecha.release_dates[0].certification)
+        }
+
+      }).catch(() => {
+        console.log("Ocurrio un error, intente de nuevo más tarde.")
+      });
+  }
+
+  const obtnerRecomendaciones = async id => {
+    await obtenerRecomendacionesPeliculas(id).then((recomendaciones) => {
+      console.log("recomendaciones", recomendaciones)
+
+      if (recomendaciones.data) {
+        setRecomendaciones(recomendaciones.data.results)
+      }
+    });
+  }
+
+  const generarElenco = (actor, index) => {
+    return (
+      <span><Link to="/home" key={index}>{actor}</Link>,</span>
+    )
   }
 
   return (
@@ -45,13 +104,32 @@ const Detalle = () => {
             <h3 className='mt-5'>{detalle.title}</h3>
             <div className="mt-4 mb-4">
               <span id="fecha">{moment(detalle.release_date).format("YYYY")}</span>
-              <span id="certificacion" className="ms-3">PG-13</span>
+              <span id="certificacion" className="ms-3">{certificacion}</span>
             </div>
             <div className="">
-              <p className="text-gray">Elenco: <span className="text-white" id="elenco"><a className="link-actor">Tom Holland,  </a><a className="link-actor">Zendaya,  </a><a className="link-actor">Benedict Cumberbatch,  </a><a className="link-actor">Jacob Batalon,  </a><a className="link-actor">Jon Favreau,  </a><a className="link-actor">Jamie Foxx,  </a><a className="link-actor">Willem Dafoe,  </a><a className="link-actor">Alfred Molina,  </a><a className="link-actor">Benedict Wong,  </a><a className="link-actor">Tony Revolori,  </a><a className="link-actor">Marisa Tomei,  </a><a className="link-actor">Andrew Garfield,  </a><a className="link-actor">Tobey Maguire,  </a><a className="link-actor">Angourie Rice,  </a><a className="link-actor">Arian Moayed... </a><a className="link-actor">Paula Newsome,  </a><a className="link-actor" href="#" id="verMas">Ver más</a></span></p>
-              <p className="text-gray">Géneros: <span className="text-white" id="genero">Action, Adventure, Science Fiction</span></p>
-              <p className="text-gray">Producción: <span className="text-white" id="produccion">Columbia Pictures, Marvel Studios, Pascal Pictures</span></p>
+              <p className="text-gray">Elenco:
+                <span className="text-white" id="elenco">
+                  {creditos}
+                  {/* {
+                    //creditos.map((actor, index) => <Link to="/home" key={index}>{actor}</Link>)
+                  } */}
+                </span>
+              </p>
+              <p className="text-gray">Géneros: <span className="text-white" id="genero">{generos}</span></p>
+              <p className="text-gray">Producción: <span className="text-white" id="produccion">{produccion}</span></p>
             </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h4 className='mt-5'>Recomendaciones</h4>
+          </Col>
+        </Row>
+        <Row className='mb-5'>
+          <Col md="12" className='col-recomendaciones'>
+            {
+              recomendaciones.map((pelicula, index) => <CustomCard pelicula={pelicula} key={index}></CustomCard>)
+            }
           </Col>
         </Row>
       </Container>
