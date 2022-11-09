@@ -27,7 +27,6 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
 
   const obtenerBusqueda = async busqueda => {
     await obtenerBusquedasPalabras("multi", busqueda).then((response) => {
-      console.log("resultado", response.data.results)
       setLista(response.data.results)
     })
   }
@@ -40,7 +39,7 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
 
 
   const ir = pelicula => {
-    if (pelicula) {
+    if(pelicula.media_type !== 'person') {
       //closeModal()
       return { pathname: `/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id, type: pelicula.media_type } }
     }
