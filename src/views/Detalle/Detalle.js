@@ -19,8 +19,6 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 const Detalle = () => {
   //PARAMETROS
   const { id, type } = useParams();
-
-  console.log(id, type)
   
   const URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
@@ -32,9 +30,13 @@ const Detalle = () => {
   const [recomendaciones, setRecomendaciones] = useState([]);
 
   useEffect(() => {
-    type === 'tv' ? obtenerDetalleTv(id) : obtenerDetalle(id)
+    if(type === 'tv') {
+      obtenerDetalleTv(id)
+    } else {
+      obtenerDetalle(id)
+      obtenerCertificacion(id)
+    }
     obtenerCreditos(id, type)
-    obtenerCertificacion(id)
     obtnerRecomendaciones(id, type)
   }, [id]);
 
@@ -42,7 +44,8 @@ const Detalle = () => {
     await getDataMovie(id)
       .then((movie) => {
         if (movie.data) {
-          setDetalle(movie.data)
+          let url = movie.data.poster_path ?  `${URL_IMAGE}${detalle.poster_path}` : ""
+          setDetalle({...movie.data, url_img: url})
 
           setGeneros(generarString(movie.data.genres))
           setProduccion(generarString(movie.data.production_companies))
@@ -57,7 +60,8 @@ const Detalle = () => {
     await getDetailTV(id)
       .then((movie) => {
         if (movie.data) {
-          setDetalle(movie.data)
+          let url = movie.data.poster_path ?  `${URL_IMAGE}${detalle.poster_path}` : ""
+          setDetalle({...movie.data, url_img: url})
 
           setGeneros(generarString(movie.data.genres))
           setProduccion(generarString(movie.data.production_companies))
@@ -96,7 +100,6 @@ const Detalle = () => {
 
   const obtnerRecomendaciones = async (id, type) => {
     await obtenerRecomendacionesPeliculas(id, type).then((recomendaciones) => {
-      console.log("recomendaciones", recomendaciones)
 
       if (recomendaciones.data) {
         setRecomendaciones(recomendaciones.data.results)
@@ -116,7 +119,7 @@ const Detalle = () => {
       <Container className="container-general">
         <Row className="justify-content-md-center pt-5">
           <Col xs md="6">
-            <Image fluid className='poster' src={`${URL_IMAGE}${detalle.poster_path}`}></Image>
+            <Image fluid className='poster' src={detalle.url_img}></Image>
           </Col>
           <Col xs md="6">
             <h3 className='mt-5'>{detalle?.title || detalle?.name}</h3>
