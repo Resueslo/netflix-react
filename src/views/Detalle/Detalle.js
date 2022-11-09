@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from "react-router-dom";
 import './detalle.css'
-import { getDataMovie, obtenerCreditosPelicula, obtenerFechasYCertificacion, obtenerRecomendacionesPeliculas } from "../../services/services";
+import { getDataMovie, obtenerCreditosPelicula, obtenerFechasYCertificacion, obtenerRecomendacionesPeliculas, getDetailTV } from "../../services/services";
 import { generarString } from '../../utilities/functions/arrayToText'
 
 import moment from 'moment';
@@ -18,8 +18,10 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 
 const Detalle = () => {
   //PARAMETROS
-  const location = useParams();
-  console.log(location);
+  const { id, type } = useParams();
+
+  console.log(id, type)
+  
   const URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
   const [detalle, setDetalle] = useState([]);
@@ -30,11 +32,11 @@ const Detalle = () => {
   const [recomendaciones, setRecomendaciones] = useState([]);
 
   useEffect(() => {
-    obtenerDetalle(location.id)
-    obtenerCreditos(location.id)
-    obtenerCertificacion(location.id)
-    obtnerRecomendaciones(location.id)
-  }, []);
+    type === 'tv' ? obtenerDetalleTv(id) : obtenerDetalle(id)
+    obtenerCreditos(id, type)
+    obtenerCertificacion(id)
+    obtnerRecomendaciones(id, type)
+  }, [id]);
 
   const obtenerDetalle = async id => {
     await getDataMovie(id)
@@ -51,8 +53,23 @@ const Detalle = () => {
 
   }
 
-  const obtenerCreditos = async id => {
-    await obtenerCreditosPelicula(id)
+  const obtenerDetalleTv = async id => {
+    await getDetailTV(id)
+      .then((movie) => {
+        if (movie.data) {
+          setDetalle(movie.data)
+
+          setGeneros(generarString(movie.data.genres))
+          setProduccion(generarString(movie.data.production_companies))
+        }
+      }).catch(() => {
+        console.log("Ocurrio un error, intente de nuevo más tarde.")
+      });
+
+  }
+
+  const obtenerCreditos = async (id, type) => {
+    await obtenerCreditosPelicula(id, type)
       .then((creditos) => {
         if (creditos.data) {
           setCreditos(generarString(creditos.data.cast))
@@ -77,8 +94,8 @@ const Detalle = () => {
       });
   }
 
-  const obtnerRecomendaciones = async id => {
-    await obtenerRecomendacionesPeliculas(id).then((recomendaciones) => {
+  const obtnerRecomendaciones = async (id, type) => {
+    await obtenerRecomendacionesPeliculas(id, type).then((recomendaciones) => {
       console.log("recomendaciones", recomendaciones)
 
       if (recomendaciones.data) {

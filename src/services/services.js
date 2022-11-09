@@ -17,12 +17,12 @@ export const getDataMovie = (id_movie) => {
 
 }
 
-export const  obtenerCreditosPelicula =  (id_movie) => {
-    return    clientAxios.get( `/movie/${id_movie}/credits?api_key=${API_KEY}&language=es-MX`);
+export const  obtenerCreditosPelicula =  (id_movie, type) => {
+    return    clientAxios.get( `/${type}/${id_movie}/credits?api_key=${API_KEY}&language=es-MX`);
 }
 
-export const  obtenerRecomendacionesPeliculas = (id_movie) => {
-    return   clientAxios.get(`/movie/${id_movie}/recommendations?api_key=${API_KEY}&language=es-MX`);
+export const  obtenerRecomendacionesPeliculas = (id_movie, type) => {
+    return   clientAxios.get(`/${type}/${id_movie}/recommendations?api_key=${API_KEY}&language=es-MX`);
 }
 
 export const  obtenerFechasYCertificacion =  (id_movie) => {
