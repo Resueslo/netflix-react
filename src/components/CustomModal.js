@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import CustomCard from '../components/CustomCard/CustomCard';
 
@@ -13,10 +13,13 @@ import { Container } from 'react-bootstrap';
 const CustomModal = ({ show, fullscreen, closeModal }) => {
 
   const [lista, setLista] = useState([]);
+
+  const navigate = useNavigate();
+
   function handleSearch(e) {
     let busqueda = e.target.value
 
-    if(busqueda) 
+    if (busqueda)
       obtenerBusqueda(busqueda)
     else
       setLista([])
@@ -32,6 +35,15 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
   const handleCloseModal = () => {
     setLista([])
     closeModal()
+  }
+
+
+
+  const ir = pelicula => {
+    if (pelicula) {
+      //closeModal()
+      return { pathname: `/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id, type: pelicula.media_type } }
+    }
   }
 
   return (
@@ -50,9 +62,9 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
           <Row className='mt-5 mb-5'>
             <Col md="12" className='col-recomendaciones'>
               {
-                lista.length ? 
-                lista.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={{ pathname:`/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id , type: pelicula.media_type}} }><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>) : 
-                <div className='sin-resultados'>Sin resultados para mostrar</div>
+                lista.length ?
+                  lista.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={ir(pelicula)}><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>) :
+                  <div className='sin-resultados'>Sin resultados para mostrar</div>
               }
             </Col>
           </Row>
