@@ -129,7 +129,7 @@ const Detalle = () => {
         <Row className='mb-5'>
           <Col md="12" className='col-recomendaciones'>
             {
-              recomendaciones.map((pelicula, index) => <CustomCard pelicula={pelicula} key={index}></CustomCard>)
+              recomendaciones.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={{ pathname:`/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id , type: pelicula.media_type}} }><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>)
             }
           </Col>
         </Row>
