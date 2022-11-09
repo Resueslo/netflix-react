@@ -69,10 +69,10 @@ function CustomNavbar({ url }) {
             <NavLink className="nav-link">Series</NavLink>
             <NavLink className="nav-link">Generos
 
-              {genres.map(genre => {
+              {/* {genres.map(genre => {
                 console.log(genre.name)
               })
-              }
+              } */}
 
             </NavLink>
             <NavLink className="nav-link">Novedades populares</NavLink>
