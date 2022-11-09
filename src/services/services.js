@@ -9,7 +9,7 @@ export const detailUrl= "/detalle.html?id=";
 export const getLastMovies = `/movie/now_playing?api_key=${API_KEY}&language=es-MX&page=1`;
 export const  getGenreMovies = `/genre/movie/list?api_key=${API_KEY}&language=es-MX`;
 export const getTvShows = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es-MX`;
-
+export const getRatedMovies = `/trending/movie/week?api_key=${API_KEY}&language=en-US`;
 
 
 export const getDataMovie = (id_movie) => {
@@ -32,10 +32,6 @@ export const  obtenerFechasYCertificacion =  (id_movie) => {
 export const  obtenerBusquedasPalabras =  (busqueda, texto)=> {
     return  clientAxios.get(`/search/${busqueda}?api_key=${API_KEY}&language=es-MX&query=${texto}&page=1&include_adult=false`);
 }
-
-
-
-
 
 export const  getDetailTV =  (id)=> {
     return  clientAxios.get(`/tv/${id}?api_key=${API_KEY}&language=es-MX`);

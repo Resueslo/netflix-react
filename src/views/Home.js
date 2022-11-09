@@ -2,14 +2,16 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import CustomNavbar from '../components/CustomNavbar'
 import  Carousel  from '../components/Carousel/Carousel'
-import {getGenreMovies, getLastMovies,getTrending, getTvShows} from '../services/services.js'
+import {getGenreMovies, getLastMovies,getRatedMovies,getTrending, getTvShows} from '../services/services.js'
 import  Banner  from '../components/Bannner/Banner'
+import Top10 from '../components/Top10/Top10'
 const Home = () => {
   return (
     <>
       <CustomNavbar url={getGenreMovies}/>
       <Container fluid className="container-general">
         <Banner url={getLastMovies}/>
+        <Top10 name="Las 10 peliculas mas Populares" url={getRatedMovies} type="movie"/>
         <Carousel name="Populares" url={getLastMovies} type="movie"/>
         <Carousel name="Tendencias" url={getTrending('movie')} type="movie"/>
         <Carousel name="Series" url={getTrending('tv')} type="tv"/>
