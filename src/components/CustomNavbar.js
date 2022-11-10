@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { BsSearch, BsFillBellFill } from "react-icons/bs";
-import CustomModal from './CustomModal';
+import Search from './Search/Search';
 import "./Navbar/Navbar.css"
 import Dropdown from './Dropdown/Dropdown';
 
@@ -77,7 +77,7 @@ function CustomNavbar({ url }) {
         </Container>
       </Navbar>
 
-      <CustomModal show={showModal} fullscreen={true} closeModal={handleCloseModal}></CustomModal>
+      <Search show={showModal} fullscreen={true} closeModal={handleCloseModal}></Search>
     </>
   )
 }

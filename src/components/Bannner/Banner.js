@@ -1,8 +1,8 @@
-
-import React from 'react'
 import clientAxios from '../../config/clientAxios';
 import { useEffect, useState } from 'react';
 import './Banner.css'
+import { Link } from "react-router-dom";
+
 function Banner({ url }) {
     const [movie, setMovies] = useState([]);
 
@@ -12,7 +12,6 @@ function Banner({ url }) {
             setMovies(request.data.results[
                 Math.floor(Math.random() * request.data.results.length - 1)
             ]);
-            console.log(movie);
             return request;
         }
         getData();
@@ -38,7 +37,7 @@ function Banner({ url }) {
                 <h1 className="banner__title">{movie?.title || movie?.name || movie?.original_name}</h1>
                 <div className="banner__buttons">
                     <div className="banner__button">Play</div>
-                    <div className="banner__button">My List</div>
+                    <Link className="banner__button" to={`/detalle/${movie.id}/movie`}>Más información</Link>
                 </div>
 
                 <h1 className='banner__description'>
