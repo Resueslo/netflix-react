@@ -11,6 +11,7 @@ import Error from './views/Error';
 import Detalle from './views/Detalle/Detalle';
 
 import Home from './views/Home.js'
+import Actor from './views/Actor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
         <Route path="/" element={<Home />}/>
         <Route path="/home" element={<Home />}/>
         <Route path="/detalle/:id/:type" component={Detalle} element={<Detalle />}/>
+        <Route path="/actor/:id" component={Actor} element={<Actor />}/>
         <Route path="*" element={<Error />}/>
       </Routes>
     </BrowserRouter>
