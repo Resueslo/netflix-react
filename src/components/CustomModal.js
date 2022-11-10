@@ -37,9 +37,11 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
 
 
   function ir(e, pelicula) {
-    e.preventDefault()
-    if(pelicula.media_type !== 'person') {
-      handleCloseModal()
+    e.preventDefault()    
+    handleCloseModal()
+    if(pelicula.media_type == 'person') {
+      navigate(`/actor/${pelicula.id}`)
+    } else {
       navigate(`/detalle/${pelicula.id}/${pelicula.media_type}`)
     }
   }
