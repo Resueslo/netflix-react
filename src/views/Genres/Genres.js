@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link,  useParams } from "react-router-dom";
 import '../Detalle/detalle.css'
 import { getMoviesGenre,getGenreMovies } from "../../services/services";
+import Loading from '../../components/Loading';
 
 
 
@@ -17,15 +18,19 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 const  Genres = () => {
   const { id, name } = useParams();
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     getMoviesGenre(id).then(response=>{
       setMovies(response.data.results)
-
+      setLoading(false)
    })
   }, [id]);
 
-  
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <>
