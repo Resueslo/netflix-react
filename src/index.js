@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Error from './views/Error';
 import Detalle from './views/Detalle/Detalle';
-
+import Genres from './views/Genres/Genres';
 import Home from './views/Home.js'
 import Actor from './views/Actor';
 
@@ -23,6 +23,7 @@ root.render(
         <Route path="/detalle/:id/:type" component={Detalle} element={<Detalle />}/>
         <Route path="/actor/:id" component={Actor} element={<Actor />}/>
         <Route path="*" element={<Error />}/>
+        <Route path="/genre/:name/:id" component={Genres} element={<Genres/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
