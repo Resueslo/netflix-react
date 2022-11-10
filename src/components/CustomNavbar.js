@@ -11,7 +11,7 @@ import Dropdown from './Dropdown/Dropdown';
 function CustomNavbar({ url }) {
   const [showModal, setShowModal] = useState(false);
   
-  const [click, setClick] = useState(false);
+
   const [dropdown, setDropdown] = useState(false);
 
  
@@ -24,8 +24,7 @@ function CustomNavbar({ url }) {
     setShowModal(false);
   }
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {

@@ -23,7 +23,7 @@ root.render(
         <Route path="/detalle/:id/:type" component={Detalle} element={<Detalle />}/>
         <Route path="/actor/:id" component={Actor} element={<Actor />}/>
         <Route path="*" element={<Error />}/>
-        <Route path="/genre/:id" component={Genres} element={<Genres/>}/>
+        <Route path="/genre/:name/:id" component={Genres} element={<Genres/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

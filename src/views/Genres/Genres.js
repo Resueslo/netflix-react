@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link,  useParams, useLocation } from "react-router-dom";
+import { Link,  useParams } from "react-router-dom";
 import '../Detalle/detalle.css'
 import { getMoviesGenre,getGenreMovies } from "../../services/services";
 
@@ -15,14 +15,13 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 
 
 const  Genres = () => {
-  const { id } = useParams();
-  const location= useLocation();
-  
+  const { id, name } = useParams();
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     getMoviesGenre(id).then(response=>{
       setMovies(response.data.results)
+
    })
   }, [id]);
 
@@ -34,7 +33,7 @@ const  Genres = () => {
       <Container className="container-general">
         <Row>
           <Col>
-            <h4 className='mt-5'>{location.state.name}</h4>
+            <h4 className='mt-5'> {name } </h4>
           </Col>
         </Row>
         <Row className='mb-5'>
