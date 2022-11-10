@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import './detalle.css'
 import { getDataMovie, obtenerCreditosPelicula, obtenerFechasYCertificacion, obtenerRecomendacionesPeliculas, getDetailTV } from "../../services/services";
 import { generarString } from '../../utilities/functions/arrayToText'
-
+import { getGenreMovies } from '../../services/services';
 import moment from 'moment';
 
 
@@ -113,7 +113,7 @@ const Detalle = () => {
 
   return (
     <>
-      <CustomNavbar />
+      <CustomNavbar url={getGenreMovies}/>
       <Container className="container-general">
         <Row className="justify-content-md-center pt-5">
           <Col xs md="6">

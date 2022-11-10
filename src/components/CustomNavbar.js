@@ -6,22 +6,15 @@ import Nav from 'react-bootstrap/Nav';
 import { BsSearch, BsFillBellFill } from "react-icons/bs";
 import CustomModal from './CustomModal';
 import "./Navbar/Navbar.css"
-import clientAxios
-  from '../config/clientAxios';
+import Dropdown from './Dropdown/Dropdown';
 
 function CustomNavbar({ url }) {
   const [showModal, setShowModal] = useState(false);
-  const [genres, setGenres] = useState([]);
+  
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
-  useEffect(() => {
-    async function getData() {
-      const request = await clientAxios.get(url);
-      setGenres(request.data.genres);
-    }
-    getData();
-  }, [url]);
+ 
 
   function handleShowModal() {
     setShowModal(true);
@@ -67,14 +60,10 @@ function CustomNavbar({ url }) {
           <Nav className="me-auto">
             <NavLink className="nav-link" to="/home">Inicio</NavLink>
             <NavLink className="nav-link">Series</NavLink>
-            <NavLink className="nav-link">Generos
-
-              {/* {genres.map(genre => {
-                console.log(genre.name)
-              })
-              } */}
-
-            </NavLink>
+            <li className="nav-link"  onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}  >Generos
+              {dropdown && <Dropdown url={url}/>}
+            </li> 
             <NavLink className="nav-link">Novedades populares</NavLink>
           </Nav>
 
