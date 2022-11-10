@@ -43,6 +43,10 @@ export const  getTrending =  (option) =>{
 
 }
 
+export const getMoviesGenre = (option) =>{
+    return clientAxios.get(`/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=${option}`);
+}
+
 export const  obtenerVideosPelicula =  (id) => {
     return  clientAxios.get(`/movie/${id}/videos?api_key=${API_KEY}&language=es-MX`);
 }

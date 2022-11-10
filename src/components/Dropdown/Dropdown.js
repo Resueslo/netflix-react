@@ -30,7 +30,9 @@ function Dropdown({url}) {
             <li key={index} >
               <Link
                 className="dropdown-item"
-                onClick={() => setClick(false)}
+                
+                to= { { pathname:`/genre/${genre.id}` } }
+                 state= {{ id: genre.id, name:genre.name}}
                >
                 {genre.name}
               </Link>
