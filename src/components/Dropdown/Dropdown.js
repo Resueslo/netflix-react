@@ -31,8 +31,8 @@ function Dropdown({url}) {
               <Link
                 className="dropdown-item"
                 
-                to= { { pathname:`/genre/${genre.id}` } }
-                 state= {{ id: genre.id, name:genre.name}}
+                to= { { pathname:`/genre/${genre.name}/${genre.id}` } }
+                state= {{ id: genre.id, name:genre.name}}
                >
                 {genre.name}
               </Link>
