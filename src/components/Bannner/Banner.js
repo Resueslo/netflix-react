@@ -37,7 +37,7 @@ function Banner({ url }) {
                 <h1 className="banner__title">{movie?.title || movie?.name || movie?.original_name}</h1>
                 <div className="banner__buttons">
                     <div className="banner__button">Play</div>
-                    <Link className="banner__button" to={`/detalle/${movie.id}/movie`}>Más información</Link>
+                    <Link className="banner__button" to={movie.id ?  `/detalle/${movie.id}/movie` : ""}>Más información</Link>
                 </div>
 
                 <h1 className='banner__description'>
