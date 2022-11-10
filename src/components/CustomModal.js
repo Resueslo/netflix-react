@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import CustomCard from '../components/CustomCard/CustomCard';
 
@@ -11,10 +11,8 @@ import { obtenerBusquedasPalabras } from "../services/services";
 import { Container } from 'react-bootstrap';
 
 const CustomModal = ({ show, fullscreen, closeModal }) => {
-
-  const [lista, setLista] = useState([]);
-
   const navigate = useNavigate();
+  const [lista, setLista] = useState([]);
 
   function handleSearch(e) {
     let busqueda = e.target.value
@@ -38,10 +36,11 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
 
 
 
-  const ir = pelicula => {
+  function ir(e, pelicula) {
+    e.preventDefault()
     if(pelicula.media_type !== 'person') {
-      //closeModal()
-      return { pathname: `/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id, type: pelicula.media_type } }
+      handleCloseModal()
+      navigate(`/detalle/${pelicula.id}/${pelicula.media_type}`)
     }
   }
 
@@ -62,7 +61,7 @@ const CustomModal = ({ show, fullscreen, closeModal }) => {
             <Col md="12" className='col-recomendaciones'>
               {
                 lista.length ?
-                  lista.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={ir(pelicula)}><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>) :
+                  lista.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} onClick={(e) => ir(e, pelicula)}><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>) :
                   <div className='sin-resultados'>Sin resultados para mostrar</div>
               }
             </Col>

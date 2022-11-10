@@ -19,8 +19,6 @@ import CustomCard from '../../components/CustomCard/CustomCard';
 const Detalle = () => {
   //PARAMETROS
   const { id, type } = useParams();
-
-  console.log(id, type)
   
   const URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
