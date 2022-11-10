@@ -126,16 +126,13 @@ const Detalle = () => {
           <Col xs md="6">
             <h3 className='mt-5'>{detalle?.title || detalle?.name}</h3>
             <div className="mt-4 mb-4">
-              <span id="fecha">{moment(detalle.release_date).format("YYYY")}</span>
+              <span id="fecha">{detalle.release_date ? moment(detalle.release_date).format("YYYY") : ""}</span>
               <span id="certificacion" className="ms-3">{certificacion}</span>
             </div>
             <div className="">
-              <p className="text-gray">Elenco:
-                <span className="text-white" id="elenco">
-                </span>
-              </p>
-              <p className="text-gray">Géneros: <span className="text-white" id="genero">{generos}</span></p>
-              <p className="text-gray">Producción: <span className="text-white" id="produccion">{produccion}</span></p>
+              <p className="text-gray">Elenco: <span className="text-white" id="elenco">{creditos || "No se encontro información"}</span></p>
+              <p className="text-gray">Géneros: <span className="text-white" id="genero">{generos || "No se encontro información"}</span></p>
+              <p className="text-gray">Producción: <span className="text-white" id="produccion">{produccion || "No se encontro información"}</span></p>
             </div>
           </Col>
         </Row>
@@ -148,6 +145,9 @@ const Detalle = () => {
           <Col md="12" className='col-recomendaciones'>
             {
               recomendaciones.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={{ pathname: `/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id, type: pelicula.media_type } }}><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>)
+            }
+            {
+              !recomendaciones.length ? "No se encontraron sugerencias" : ""
             }
           </Col>
         </Row>

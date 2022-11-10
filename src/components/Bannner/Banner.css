@@ -25,7 +25,6 @@
 .banner__buttons{
     display: flex;
     padding-top: 1rem;
-    
 }
 .banner__button{
     cursor: pointer;
@@ -40,6 +39,7 @@
     padding-top: 0.5rem;
     background-color: rgba(51, 51, 51, 0.5);
     padding-bottom: 0.5rem;
+    text-decoration: none;
 }
 .banner__button:hover{
     color:#000;
