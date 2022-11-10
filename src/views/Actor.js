@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from "react-router-dom";
 import './Detalle/detalle.css'
 import { obtenerBiografia, obtenerPeliculas } from "../services/services";
+import Loading from '../components/Loading';
 
 import moment from 'moment';
 
@@ -16,13 +17,15 @@ import CustomCard from '../components/CustomCard/CustomCard';
 
 const Actor = () => {
   const { id } = useParams();
-  
+
   const URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
   const [actor, setActor] = useState([]);
   const [peliculas, setPeliculas] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     obtenerBiografiaActor(id)
     obtenerPeliculasActor(id)
   }, [id]);
@@ -32,7 +35,7 @@ const Actor = () => {
       .then((response) => {
         if (response.data) {
           setActor(response.data)
-
+          setLoading(false)
         }
       }).catch(() => {
         console.log("Ocurrio un error, intente de nuevo más tarde.")
@@ -50,6 +53,10 @@ const Actor = () => {
         console.log("Ocurrio un error, intente de nuevo más tarde.")
       });
 
+  }
+
+  if (loading) {
+    return <Loading />
   }
 
   return (

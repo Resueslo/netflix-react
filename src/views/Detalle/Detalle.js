@@ -14,12 +14,13 @@ import Col from 'react-bootstrap/Col';
 
 import CustomNavbar from '../../components/CustomNavbar'
 import CustomCard from '../../components/CustomCard/CustomCard';
+import Loading from '../../components/Loading';
 
 
 const Detalle = () => {
   //PARAMETROS
   const { id, type } = useParams();
-  
+
   const URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
   const [detalle, setDetalle] = useState([]);
@@ -28,9 +29,11 @@ const Detalle = () => {
   const [creditos, setCreditos] = useState("");
   const [certificacion, setCertificacion] = useState("");
   const [recomendaciones, setRecomendaciones] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(type === 'tv') {
+    setLoading(true)
+    if (type === 'tv') {
       obtenerDetalleTv(id)
     } else {
       obtenerDetalle(id)
@@ -44,10 +47,12 @@ const Detalle = () => {
     await getDataMovie(id)
       .then((movie) => {
         if (movie.data) {
-          setDetalle({...movie.data})
+          setDetalle({ ...movie.data })
 
           setGeneros(generarString(movie.data.genres))
           setProduccion(generarString(movie.data.production_companies))
+
+          setLoading(false)
         }
       }).catch(() => {
         console.log("Ocurrio un error, intente de nuevo más tarde.")
@@ -111,6 +116,10 @@ const Detalle = () => {
     )
   }
 
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <>
       <CustomNavbar />
@@ -147,7 +156,7 @@ const Detalle = () => {
         <Row className='mb-5'>
           <Col md="12" className='col-recomendaciones'>
             {
-              recomendaciones.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={{ pathname:`/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id , type: pelicula.media_type}} }><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>)
+              recomendaciones.map((pelicula, index) => <Link className="link-movie" key={pelicula.id} to={{ pathname: `/detalle/${pelicula.id}/${pelicula.media_type}`, state: { id: pelicula.id, type: pelicula.media_type } }}><CustomCard pelicula={pelicula} key={index}></CustomCard></Link>)
             }
           </Col>
         </Row>
