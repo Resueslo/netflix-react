@@ -68,6 +68,7 @@ const Detalle = () => {
 
           setGeneros(generarString(movie.data.genres))
           setProduccion(generarString(movie.data.production_companies))
+          setLoading(false)
         }
       }).catch(() => {
         console.log("Ocurrio un error, intente de nuevo más tarde.")
@@ -110,12 +111,6 @@ const Detalle = () => {
     });
   }
 
-  const generarElenco = (actor, index) => {
-    return (
-      <span><Link to="/home" key={index}>{actor}</Link>,</span>
-    )
-  }
-
   if (loading) {
     return <Loading />
   }
@@ -137,10 +132,6 @@ const Detalle = () => {
             <div className="">
               <p className="text-gray">Elenco:
                 <span className="text-white" id="elenco">
-                  {creditos}
-                  {/* {
-                    //creditos.map((actor, index) => <Link to="/home" key={index}>{actor}</Link>)
-                  } */}
                 </span>
               </p>
               <p className="text-gray">Géneros: <span className="text-white" id="genero">{generos}</span></p>
