@@ -52,7 +52,7 @@ export const  obtenerPeliculas =  (id_person) => {
 }
 
 export const  obtenerBiografia =  (id_person) => {
-    return  clientAxios.get(`/person/${id_person}?api_key=${API_KEY}&language=es-MX`);
+    return  clientAxios.get(`/person/${id_person}?api_key=${API_KEY}&language=es-Es`);
 
 }
 
