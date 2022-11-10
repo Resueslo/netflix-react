@@ -1,11 +1,29 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import CustomNavbar from '../components/CustomNavbar'
 import  Carousel  from '../components/Carousel/Carousel'
 import {getGenreMovies, getLastMovies,getRatedMovies,getTrending, getTvShows} from '../services/services.js'
 import  Banner  from '../components/Bannner/Banner'
 import Top10 from '../components/Top10/Top10'
+import Loading from '../components/Loading'
+
 const Home = () => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 100)
+  }, []);
+
+  if (loading) {
+    return <Loading />
+  }
+
+
+
   return (
     <>
       <CustomNavbar url={getGenreMovies}/>
