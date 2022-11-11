@@ -45,7 +45,6 @@ const Actor = () => {
   const obtenerPeliculasActor = async id => {
     await obtenerPeliculas(id)
       .then((response) => {
-        console.log("response", response)
         if (response.data) {
           setPeliculas(response.data.cast)
         }

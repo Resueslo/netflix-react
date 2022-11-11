@@ -19,7 +19,7 @@ function Carousel  ({name,url,type})  {
 
 
     return (
-        <div className='row'>
+        <div className='row row__custom'>
             <h2>{name}</h2>
             <div  className='row__posters'>
                 { movies.map(movie => {

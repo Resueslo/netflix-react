@@ -1,9 +1,9 @@
-.top10{
-    max-height: 180px;
-    
-        object-fit: contain;
-        max-height: 200px;
-        margin-right: 10px;
-        transition: transform 450ms;
-    
+.top10 {
+  max-height: 180px;
+
+  object-fit: contain;
+  max-height: 200px;
+  margin-right: 10px;
+  transition: transform 450ms;
+  margin-right: 0;
 }
