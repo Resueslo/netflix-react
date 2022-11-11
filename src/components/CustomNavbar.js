@@ -58,12 +58,10 @@ function CustomNavbar({ url }) {
           </Navbar.Brand>
           <Nav className="me-auto">
             <NavLink className="nav-link" to="/home">Inicio</NavLink>
-            <NavLink className="nav-link">Series</NavLink>
             <li className="nav-link"  onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}  >Generos
               {dropdown && <Dropdown url={url}/>}
-            </li> 
-            <NavLink className="nav-link">Novedades populares</NavLink>
+            </li>
           </Nav>
 
           <Nav>
